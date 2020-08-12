@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio</title>
+    <link href="/css/estilologin.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<form class="cuadro">
+<div class="container">
+    <h1>Ingresa a nuestro sitio</h1 >
+ 
+<label name="primboton" class="dato">Usuario:</label>
+
+<input type="text" name="primboton" id="name" placeholder="Ingrese su usuario" class="campo">
+<div id="erroruser"></div>
+
+<label name="segboton" class="dato">Contraseña:</label>
+<input type="password" name="segboton" id="pass" placeholder="Ingrese contraseña" class="campo">
+<div id="errorpass"></div>
+
+<label name="terboton" class="dato">Número:</label>
+
+<input type="num" name="terboton" id="num" placeholder="Ingrese su número" class="campo">
+<div id="errornum"></div>
+
+
+<button class="boton"  type="button" id="boton" onclick="enviar()" >Enviar</button>
+</form>
+
+
+<script src="/js/login.js"></script>
+</body>
+</html>

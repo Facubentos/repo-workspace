@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: purple;
+    color: whitesmoke;
+}
+
+h1 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.campo {
+    border: #1e57d3 1px  solid;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px ;
+    font-style:oblique ;
+    padding: 10px;
+    background-color : #24303c;
+    margin-bottom: 10px;
+    }
+
+.cuadro{
+     width: 290px;
+        background-color: #24313c ;
+        padding: 30px;
+        margin: auto;
+        margin-top: 150px;
+        border-radius: 4px;
+        color:silver;
+        font-size: 16px;
+
+    }    
+
+
+.dato{
+    text-align: left;
+}
+
+#boton{
+    width: 100%;
+    color: silver;
+    background: #1f53c5;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;  
+    margin: 16px 0;
+}
