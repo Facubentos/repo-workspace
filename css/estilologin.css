@@ -5,34 +5,35 @@
 }
 
 body{
-    background-color: purple;
-    color: whitesmoke;
+    background-color: #343a40;
 }
 
 h1 {
     margin-bottom: 5px;
     text-align: center;
+    color: #343a40;
 }
 
 .campo {
-    border: #1e57d3 1px  solid;
+    border: silver 1px  solid;
     border-radius: 4px;
     color: white;
     font-size: 18px ;
     font-style:oblique ;
     padding: 10px;
-    background-color : #24303c;
+    background-color : #666;
     margin-bottom: 10px;
     }
 
 .cuadro{
      width: 290px;
-        background-color: #24313c ;
+        background-color: whitesmoke;
+        opacity: 0.9;
         padding: 30px;
         margin: auto;
         margin-top: 150px;
         border-radius: 4px;
-        color:silver;
+        color: silver;
         font-size: 16px;
 
     }    
@@ -45,10 +46,29 @@ h1 {
 #boton{
     width: 100%;
     color: silver;
-    background: #1f53c5;
+    background: #e83e8c;
     font-size: 16px;
     border: none;
     border-radius: 4px;
     padding: 12px;  
     margin: 16px 0;
+}
+
+#checkbox{
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+#imglog{
+    width: 250px;
+    text-align: center;
+    display: block;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    opacity: 0.9;
+
 }
