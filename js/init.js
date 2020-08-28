@@ -45,3 +45,12 @@ var getJSONData = function(url){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
 });
+
+//función para salir de la página, y limpiar el session storage
+
+var salir = document.getElementById("salir")
+salir.addEventListener("click", () => {
+  sessionStorage.clear();
+  window.location.href="login.html";
+});
+

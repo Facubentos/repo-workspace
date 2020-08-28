@@ -43,6 +43,19 @@ function enviar(){
 
 function link(){
     if(!validate()){
+        var user = document.getElementById("name").value;
+        sessionStorage.setItem("usuario", user);
+
         return location.href="index.html"
     }
 }
+
+document.addEventListener("DOMContentLoaded", function(e){
+    let parrafo = document.getElementById("user");
+    let contenido = "";
+    if(sessionStorage.getItem("usuario")){
+        contenido +=  `Usuario: `+ sessionStorage.getItem("usuario") +`` ;
+        parrafo.innerHTML=contenido;
+    }
+});
+  
