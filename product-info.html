@@ -13,6 +13,12 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+
+  <style>
+    .checked{
+      color: orange;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,14 +35,109 @@
         </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 13/09/2020) y Entrega 4 (Fecha de entrega: 20/09/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <div class="container mt-5">
+    <h3 id="categoryName"></h3>
+    <hr class="my-3">
+    <dl>
+      <dt>Descripción</dt>
+      <dd>
+        <p id="categoryDescription"></p>
+      </dd>
+
+      <dt>Precio</dt>
+      <dd>
+        <p id="productCurrency" style="display: inline;"></p>
+        <p id="productCost" style="display: inline;"></p>
+      </dd>
+
+      <dt>Vendidos</dt>
+      <dd>
+        <p id="productSoldCount"></p>
+      </dd>
+
+      <dt>Categoría</dt>
+      <dd>
+        <p id="productCategory"></p>
+      </dd>
+
+      <dt>Imágenes ilustrativas</dt>
+      <dd>
+        <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+        </div>
+      </dd>
+    </dl>
+
+    <div class="row mx-auto" style="width: 200px;">
+      <h3>Comentarios</h3>
+    </div>
+    <hr class="my-3">
+
+    <div class="container">
+      <div class="row" id="comentarios">
+      </div>
+    </div>
+
+
+
+    <div class="container p-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <form action="">
+  
+          <div class="form-group">    
+          <label for="comment">Comentario:</label>
+          <textarea name="comment" id="comment" rows="3" placeholder="Ingrese su comentario..." class="form-control"></textarea>
+        </div>
+  
+          Puntuación:
+          <div class="form-group">
+             <div class="form-check form-check-inline">
+                <input id="inlineChechbox1" class="form-check-input" type="radio" name="puntuacion" value="1">
+                <label class="form-check-label" for="inlineCheckbox1">1</label>
+             </div>
+             
+             <div class="form-check form-check-inline">
+               <input id="inlineChechbox2" class="form-check-input" type="radio" name="puntuacion" value="2">
+               <label class="form-check-label" for="inlineCheckbox2">2</label>
+             </div>
+             
+             <div class="form-check form-check-inline">
+              <input id="inlineChechbox3" class="form-check-input" type="radio" name="puntuacion" value="3">
+              <label class="form-check-label" for="inlineCheckbox3">3</label>
+            </div>
+  
+            <div class="form-check form-check-inline">
+              <input id="inlineChechbox4" class="form-check-input" type="radio" name="puntuacion" value="4">
+              <label class="form-check-label" for="inlineCheckbox4">4</label>
+            </div>
+  
+            <div class="form-check form-check-inline">
+              <input id="inlineChechbox5" class="form-check-input" type="radio" name="puntuacion" value="5">
+              <label class="form-check-label" for="inlineCheckbox5">5</label>
+            </div>
+        </form> 
+        <button type="button" id="send" class="btn btn-info my-2" onclick="enviarComentario()">Enviar</button>
+  
+          <div>
+            <p class="container" id="ms-success" style="display: none;"></p>
+          </div>
+          
+      </div>
     </div>
   </div>
+  </div>
+
+
+
+
+
+  </div>
+
+
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">

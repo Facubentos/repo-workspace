@@ -116,7 +116,7 @@ var categoriesArray = [];
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))){
 
             htmlContentToAppend +=`
-            <div class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
@@ -131,7 +131,7 @@ var categoriesArray = [];
                         </p> 
                     </div>
                 </div>
-            </div>
+            </a>
             `
         }
             document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
