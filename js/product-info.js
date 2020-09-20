@@ -53,6 +53,63 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });  
 
+//Mostrar related products
+
+var related = [];
+
+function showRelatedProd(){
+    let htmlContentToAppend = "";
+    for(let i = 1; i < 2; i++){
+        let rel = related[i];
+        htmlContentToAppend += `
+        <div class="card col-3" style="width: 18rem;">
+         <img class="card-img-top img-fluid" src="`+ rel.imgSrc +`" alt="Card image cap">
+            <div class="card-body">
+             <h5 class="card-title">`+ rel.name +`</h5>
+             <p class="card-text">`+ rel.description +`</p>
+             <a href="#" class="btn btn-primary">Entrar</a>
+           </div>
+        </div>
+        </div>
+        `
+    }
+    document.getElementById("relatedprod").innerHTML = htmlContentToAppend;
+
+    for(let i = 3; i < 4; i++){
+        let rel = related[i];
+        htmlContentToAppend += `
+        <div class="card col-3" style="width: 18rem;">
+         <img class="card-img-top img-fluid" src="`+ rel.imgSrc +`" alt="Card image cap">
+            <div class="card-body">
+             <h5 class="card-title">`+ rel.name +`</h5>
+             <p class="card-text">`+ rel.description +`</p>
+             <a href="#" class="btn btn-primary">Entrar</a>
+           </div>
+        </div>
+        </div>
+        `
+    }
+    document.getElementById("relatedprod").innerHTML = htmlContentToAppend;
+}
+
+
+document.addEventListener("DOMContentLoaded", function(e){
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            //Muestro las categorías ordenadas
+            related = resultObj.data;
+            showRelatedProd();
+        }
+    });
+}); 
+
+
+
+
+
+
+// Mostrar comentarios
 var array = [];
 
 function showComments(){
