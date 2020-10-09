@@ -48,58 +48,67 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
 
-    <div class="row">
-        <div class="col-2">
-           <img src="" alt="foto">
-        </div>
-        <div class="col">
-          <h4>Name prod.</h4>
-            <span class="col-3">
-              <small class="text-muted">description</small>
-            </span>
-            <span class="col-3">
-               <small class="text-muted">Cant. prod.</small>
-             </span>
-          </div>
-        <div class="col-2">
-         <h4>Valor unitario</h4>
-        </div>
-        <div class="col-2"> 
-          <h4>Total</h4>
-        </div>
+  <div class="text-center p-4">
+    <h2>Mi Carrito</h2>
+    <p class="lead">Verás aquí todos los productos que agregaste a tu carrito de compras.</p>
+</div>
+
+  <div class="container list-group py-5" >
+<div class="list-group-item" id="cartContainer"></div>
+
+<div class="list-group-item">
+<div class="row mt-5">
+
+  <div class="col-8">
+    <div class="list-group-item">
+      <h5>Descuentos</h5>
+      <span>
+      <label class="col-8 text-muted">Código de descuento</label>
+      </span>
+      <input type="text" id="descuento" placeholder="Introduzca su código">
     </div>
 
-    <div class="row mt-5">
-      <div class="col-8">
-        <div>
-          <label class="col-8">Código de descuento</label>
-          <input type="text" id="descuento" placeholder="Introduzca su código">
-        </div>
-        <div class="mt-1">
-          <h5>Método de pago</h5>
-          <br>
-          <input type="radio"> Visa 
-          <br>
-          <input type="radio"> Mastercard 
-          <br>
-          <input type="radio">  Paypal 
-        </div>
-      </div>
-        <div class="col-4">
-                <span class="col-12">Subtotal</span>
-
-                <span class="col-12">$$$</span>
-          <div>
-            <div class="col-12">TOTAL</div>
+         <div class="">
+           <div class="list-group-item">
+             <h5>Método de pago</h5>
+             
+             <input type="radio"> Visa 
+             <br>
+             <input type="radio"> Mastercard 
+             <br>
+             <input type="radio">  Paypal 
+             <br>
+             <input type="radio">  Efectivo
+           </div>
           </div>
-        </div>
-      <div class="col-8"></div>
-      <div class="col-4">
-        <button type="submit" class=" btn btn-danger">FINALIZAR COMPRA</button>
+  </div>
+
+
+    <div class="col-4 list-group-item">
+          <div class="list-group-item">
+            <div class="col-4">Subtotal</div>
+            <span>$$$</span>
+          </div>
+      <div>
+        <div class="col-12 list-group-item">TOTAL</div>
       </div>
     </div>
+
+  
+  <div class="col-8">
+  </div>
+  <div class="col-4">
+    <button type="submit" class=" btn btn-danger">FINALIZAR COMPRA</button>
+  </div>
+</div>
+</div>
+
+
+  </div>
+
+
+
 
 
 
@@ -125,7 +134,6 @@
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div> -->
-  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
