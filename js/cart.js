@@ -40,7 +40,7 @@ function showCart(array){
 
            <div class="col-2 list-group-item"> 
               <h5 class="text-center">Total</h5>
-              <div class="py-4 ml-4" cambioMoneda(`+ articulos.currency +`,`+ articulos.unitCost +`, `+i+`)>
+              <div class="py-4 ml-4">
               <span id="parr`+i+`">` + articulos.count*articulos.unitCost +`</span>
               <span id="curren`+i+`">`+ articulos.currency + `</span>
               </div>
