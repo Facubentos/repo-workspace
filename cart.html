@@ -36,6 +36,14 @@
     margin: 0; 
     }
 
+    .mostrar-error{
+      display: none;
+    }
+
+    #divEnvio{
+      display: none;
+    }
+
 
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -68,62 +76,77 @@
 <div class="container list-group-item bg-light" id="cartContainer"></div>
 
 <div class="list-group-item bg-light">
-<div class="row mt-3">
+<div class="row">
 
-  <div class="col-8 bg-light">
-    <div class="list-group-item">
+  <div class="col-sm-8 list-group-item">
+    <div>
+    <div>
       <h4>Descuentos</h4>
+      <br>
       <span>
-      <label class="col-8 text-muted">Código de descuento</label>
+      <label class="col-lg-8 text-muted">Código de descuento</label>
       </span>
       <input type="text" id="descuento" placeholder="Introduzca su código">
     </div>
+  </div>
+  <hr>
 
-         <div class="bg-light">
-           <div class="list-group-item">
-             <h5>Método de pago</h5>
-             <div class="col">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                <label class="form-check-label" for="exampleRadios1">
-                  Visa
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                  Mastercard
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                <label class="form-check-label" for="exampleRadios3">
-                  Paypal
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
-                <label class="form-check-label" for="exampleRadios4">
-                  Efectivo
-                </label>
-              </div>
-             </div>
-           </div>
-          </div>
+ <div>
+ <div id="divEnvio">
+  <h4>Envio:</h4>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="envio" id="premium" value="premium" onclick="validateRadio(); premium(); totalcompra()">
+      <label class="form-check-label" for="premium">
+        Premium
+      </label>
+      <span class="text-muted">(2-5 días)</span>
+      <small class="text-muted">*Costo del 15% sobre el subtotal*</small>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="envio" id="express" value="express" onclick="validateRadio(); express(); totalcompra()">
+      <label class="form-check-label" for="express">
+        Express
+      </label>
+      <span class="text-muted">(5-8 días)</span>
+      <small class="text-muted">*Costo del 7% sobre el subtotal*</small>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="envio" id="standard" value="standard" onclick="validateRadio(); standard(); totalcompra()">
+      <label class="form-check-label" for="standard">
+        Standard
+      </label>
+      <span class="text-muted">(12-15 días)</span>
+      <small class="text-muted">*Costo del 5% sobre el subtotal*</small>
+    </div>
+
+    <div id="error-radiomodal">
+      <small class="mostrar-error" style="color: red;">*Debe seleccionar un método de envío*</small>
+    </div>
+  </div>
+</div>
   </div>
 
 
-    <div class="col-4 list-group-item">
+    <div class="col-sm-4 list-group-item">
       <h4 style="text-align: center;">Resumen</h4>
           <div class="list-group-item">
-            <div class="col-4">Subtotal</div>
-            <span>$$$</span>
+            <span class="col-lg"><strong>Subtotal</strong></span>
+            <span class="col-lg-2 justify-content-center" id="subtotalid"></span>
+          </div>
+          <div class="list-group-item">
+            <span class="col-lg"><strong>Envío    </strong></span>
+            <span class="col-lg-2" id="envioid"></span>
           </div>
       <div>
-        <div class="col-12 list-group-item">TOTAL</div>
+        <div class="col-lg-12 list-group-item">
+          <span class="col-lg"><strong>TOTAL   </strong></span>
+          <span class="col-lg-2" id="totalid"></span>
+        </div>
       </div>
       <div class="py-2">
-        <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#myModal">FINALIZAR COMPRA</button>
+        <button type="button" onclick="abrirModal()" id="confirm" class="btn btn-danger btn-lg btn-block disabled">FINALIZAR COMPRA</button>
       </div>
     </div>
 </div>
@@ -148,7 +171,7 @@
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Ingrese su Dirección y otros Datos de envío
+                  Datos de envío
                 </button>
               </h5>
             </div>
@@ -156,70 +179,44 @@
               <div class="card-body">
 
 
-                <form>
+                <form >
                   <p class="text-muted">
                     Información personal
                   </p>
                   <div class="row">
-                  <div class="form-group col-6">
+                  <div class="form-group col-lg-6">
                     <label for="ingresarNombre">Nombre</label>
-                    <input type="text" class="form-control" id="ingresarNombre" placeholder="Ingrese su nombre">
+                    <input type="text" class="form-control" id="ingresarNombre" onblur="validateName()" placeholder="Ingrese su nombre">
+                    <small id="error-nombre" class="mostrar-error" style="color: red;">*Debe ingresar un nombre*</small>
                   </div>
-                  <div class="form-group col-6">
+                  <div class="form-group col-lg-6">
                     <label for="ingresarApellido">Apellido</label>
-                    <input type="text" class="form-control" id="ingresarApellido" placeholder="Ingrese su apellido">
+                    <input type="text" class="form-control" id="ingresarApellido" onblur="validateSecondname()" placeholder="Ingrese su apellido">
+                    <small id="error-apellido" class="mostrar-error" style="color: red;">*Debe ingresar un apellido*</small>
                   </div>
                   </div>
 
                   <div class="row">
-                  <div class="form-group col-6">
+                  <div class="form-group col-lg-6">
                     <label for="ingresarCedula">Cedula de Identidad</label>
                     <!-- utilizando el id en css, removí las arrow de este input number -->
-                    <input type="number" class="form-control" id="ingresarCedula" minlength="8" maxlength="8" placeholder="Ingrese su documento">
+                    <input type="number" class="form-control" id="ingresarCedula" minlength="8" maxlength="8" onblur="validateDoc()" placeholder="Ingrese su documento">
+                    <small id="error-cedula" class="mostrar-error" style="color: red;">*Debe ingresar su cédula*</small>
                   </div>
-                  <div class="form-group col-6">
-                    <label for="example-date-input">Fecha de nacimiento</label>
-                    <input class="form-control" type="date" value="aaaa-mm-dd" id="example-date-input">
+                  <div class="form-group col-lg-6">
+                    <label for="ingresarFecha">Fecha de nacimiento</label>
+                    <input class="form-control" type="date" value="yyyy-MM-dd" onblur="validateDate()" id="ingresarFecha">
+                    <small id="error-fecha" class="mostrar-error" style="color: red;">*Debe ingresar su fecha de nacimiento*</small>
                   </div>
                   </div>
+                  </form>
+                  <div class="col-sm-12 text-right">
+                    <div> 
+                  <button type="" id="firstButton" class="btn btn-outline-primary" onclick="validateOne()">Confirmar</button>
+                </div>
+              </div>
 
-                  <hr>
-                  <p class="text-muted">
-                    Ubicación
-                  </p>
-
-                  <div class="row">
-                    <div class="form-group col-9">
-                      <label for="ingresarDireccion">Dirección</label>
-                      <input type="text" class="form-control" id="ingresarDireccion" placeholder="Ingrese una dirección">
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="ingresarCPostal">Código postal</label>
-                      <input type="text" class="form-control" id="ingresarCPostal" placeholder="Ingrese CP">
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label for="inputState">Departamento</label>
-                      <select id="inputState" class="form-control">
-                        <option selected>Seleccione departamento...</option>
-                        <option>...</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="ingresarTelefono">Teléfono</label>
-                      <div class="input-group mb-2 mr-sm-2">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">+598</div>
-                      </div>
-                      <input type="tel" class="form-control" id="ingresarTelefono" maxlength="9" pattern="[0-9]{9}" placeholder="Ingrese su teléfono">
-                    </div>
-                    </div>
-                  </div>
-                
-                  <button type="submit" class="btn btn-danger">Confirmar</button>
-                </form>
+                  
 
 
 
@@ -229,50 +226,150 @@
 
           <div class="card">
             <div class="card-header" id="headingTwo">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <h5 id="titcollapse" class="mb-0 btn btn-link disabled">Metodo de envío
+                <button class="btn btn-link collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   Metodo de envío
                 </button>
               </h5>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
-                ...
+
+                <form>
+                  <p class="text-muted">
+                    Ubicación
+                  </p>
+
+                  <div class="row">
+                    <div class="form-group col-lg-9">
+                      <label for="ingresarDireccion">Dirección</label>
+                      <input type="text" class="form-control" id="ingresarDireccion" placeholder="Ingrese una dirección" onblur="validateUbic()">
+                      <div  name="error">
+                      <small id="error-ubic" class="mostrar-error" style="color: red;">*Debe ingresar una dirección*</small>
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-3">
+                      <label for="ingresarCPostal">Código postal</label>
+                      <input type="text" class="form-control" id="ingresarCPostal" placeholder="Ingrese CP" onblur="validateCP()">
+                      <div  name="error">
+                      <small id="error-cp" class="mostrar-error" style="color: red;">*Debe ingresar un código postal*</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label for="inputState">Departamento</label>
+                      <select id="inputState" class="form-control" onclick="validateSelect(this.value)">
+                        <option selected value="nada" >Seleccione departamento...</option>
+                        <option value="algo">Artigas</option>
+                        <option value="algo">Canelones</option>
+                        <option value="algo">Montevideo</option>
+                        <option value="algo">Maldonado</option>
+                      </select>
+                      <div name="error">
+                      <small id="error-select" class="mostrar-error" style="color: red;">*Debe ingresar un departamento*</small>
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label for="ingresarTelefono">Teléfono</label>
+                      <div class="input-group mb-2 mr-sm-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">+598</div>
+                      </div>
+                      <input type="tel" class="form-control" id="ingresarTelefono" maxlength="9" pattern="[0-9]{9}" placeholder="Ingrese su teléfono" onblur="validateTel()">
+                    </div>
+                    <div>
+                    <small id="error-tel" class="mostrar-error" style="color: red;">*Debe ingresar un numero de teléfono*</small>
+                    </div>
+                    </div>
+                  </div>
+                </form>
+
+                <hr>
+
+                <p class="text-muted">
+                  Retiro
+                </p>
+
+                <div>
+                    <h5>Método de pago</h5>
+                    <div class="col">
+                     <div class="form-check">
+                       <input class="form-check-input" type="radio" name="radios" id="exampleRadios1" value="option1" onclick="validateRadio()">
+                       <label class="form-check-label" for="exampleRadios1">
+                         Visa
+                       </label>
+                     </div>
+                     <div class="form-check">
+                       <input class="form-check-input" type="radio" name="radios" id="exampleRadios2" value="option2" onclick="validateRadio()">
+                       <label class="form-check-label" for="exampleRadios2">
+                         Mastercard
+                       </label>
+                     </div>
+                     <div class="form-check">
+                       <input class="form-check-input" type="radio" name="radios" id="exampleRadios3" value="option3" onclick="validateRadio()">
+                       <label class="form-check-label" for="exampleRadios3">
+                         Paypal
+                       </label>
+                     </div>
+                     <div class="form-check">
+                       <input class="form-check-input" type="radio" name="radios" id="exampleRadios4" value="option4" onclick="validateRadio()">
+                       <label class="form-check-label" for="exampleRadios4">
+                         Efectivo
+                       </label>
+                     </div>
+                     <div>
+                      <small id="error-radio" class="mostrar-error" style="color: red;">*Debe seleccionar una forma de pago*</small>
+                      </div>
+                    </div>
+                    
+                </div>
+                <div class="col-sm-12 text-right">
+                  <button type="submit" onclick="validateTwo()" class="btn btn-outline-primary">Confirmar</button>
+                  </div>
+
+
               </div>
             </div>
           </div>
-
-          <div class="card">
-            <div class="card-header" id="headingThree">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Información de pago
+        </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="finalModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
                 </button>
-              </h5>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-                ...
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div id="elementmodal"></div>
+                </div>
+              </div>
+              <div class="modal-footer">
+
+                <div>
+                  <strong>TOTAL:</strong>
+                </div>
+
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-success">Confirmar compra</button>
               </div>
             </div>
           </div>
         </div>
 
-
-
-
-
-
-
-
-
-        <!-- <div class="container">
-          <div class="row" id="modal"></div>
-        </div> -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger">Comprar</button>
+        <div id="totalModal">
+          <strong>TOTAL:</strong>
+        </div>
+
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
