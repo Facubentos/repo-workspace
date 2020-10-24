@@ -11,10 +11,11 @@ function showCart(array){
 
         htmlContentToAppend += `
 
-        <div class="row justify-content-end">
-          <small class="col-md-offset-11 col-md-1 mr-3" style="color: red;">Eliminar</small>
+        <div id="producto`+i+`">
+        <div class="row justify-content-end" >
+          <small class="col-md-offset-11 col-md-1 mr-3" onclick="eliminar(`+i+`); sumaSubtotal()" style="color: red;">Eliminar</small>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" >
               <img src="` + articulos.src +`" class="img-thumbnail col-lg-2" alt="foto`+i+`">
 
                <div class="col-lg-6 list-group-item">
@@ -46,14 +47,16 @@ function showCart(array){
               <span id="curren`+i+`"></span>
               </div>
            </div> 
+           </div>
      </div>
+     <div>
         `
     }
     document.getElementById("cartContainer").innerHTML = htmlContentToAppend;
 }
 
 
-//función para calcular el total
+//función para calcular el primer subtotal
 function mostrarTotal(currency, costo, cantidad, i){
    if (currency == "UYU"){
    var total = costo*cantidad;
@@ -99,6 +102,7 @@ function totalcompra(){
    total = sumasub + finalenv;
    document.getElementById('totalid').innerHTML = total + " UYU"
    $('#confirm').removeClass('disabled');
+   $('#confirm').attr('onclick', 'abrirModal()');
 }
 
 
@@ -310,30 +314,19 @@ function showModal(array){
           <small class="col-md-offset-11 col-md-1 mr-3" style="color: red;">Eliminar</small>
         </div>
         <div class="row mb-3">
-              <img src="` + art.src +`" class="img-thumbnail col-2" alt="foto`+i+`">
+              <img src="` + art.src +`" class="img-thumbnail col-sm-3" alt="foto`+i+`">
 
-               <div class="col-6 list-group-item">
+               <div class="col-sm-6 list-group-item">
                   <h4>`+ art.name + `</h4>
                    <div class="row py-1">
-                     <div class="col-6 col-sm-9">
-                        <p class="text-muted">Descripción</p>
-                     </div>
                      <div class="col-6 col-sm-3">
                         <p class="text-muted">Cantidad</p>
                         <input class="col-md-8" onload="recibirInput()" type="number" id="mostrar`+i+`" name="cantidad" min="1" placeholder="`+ art.count +`">   
                      </div>
                    </div>
                 </div>
-         
-           <div class="col-2 list-group-item">
-                  <h5 class="text-center">Valor unitario</h5>
-               <div class="py-4 ml-4">
-                 <span>`+ art.unitCost + `</span>
-                 <span>`+ art.currency + `</span>
-               </div>
-            </div>
 
-           <div class="col-2 list-group-item"> 
+           <div class="col-sm-2 list-group-item"> 
               <h5 class="text-center">Total</h5>
               <div class="py-4 ml-4">
               <span id="parr`+i+`">` + art.count*art.unitCost +`</span>
@@ -344,4 +337,25 @@ function showModal(array){
         `
     }
     document.getElementById("elementmodal").innerHTML = htmlContentToAppend;
+}
+
+
+
+
+
+
+// FUNCION PARA ELIMINAR PRODUCTO
+
+// ¡¡¡ SIN TERMINAR !!!
+
+function eliminar(i){
+   document.getElementById('producto'+i).style.display = "none";
+   let eliminarpeso =  document.getElementById("parr"+i).innerHTML;
+   document.getElementById("parr"+i).innerHTML = eliminarpeso;
+   if ((document.getElementById("subtotalid").innerHTML - eliminarpeso) < 0){
+      document.getElementById("subtotalid").innerHTML; 
+   }else{
+      document.getElementById("subtotalid").innerHTML = -eliminarpeso;
+   }
+   showCart();
 }
