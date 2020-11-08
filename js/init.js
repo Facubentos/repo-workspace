@@ -45,13 +45,33 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+
+  //creo una variable a la que le aplico json.parse para obtener el objeto que se encuentra dentro de la key "datos".
+  //luego accedo a cada propiedad del objeto, y la muestro en su span correspondiente.
+  logueado = JSON.parse(localStorage.getItem("Datos"));
+  console.log(logueado);
+  document.getElementById("namespan").innerHTML = logueado.name;
+  document.getElementById("agespan").innerHTML = logueado.age;
+  document.getElementById("emailspan").innerHTML = logueado.email;
+  document.getElementById("telspan").innerHTML = logueado.tel;
+
 });
 
 //función para salir de la página, y limpiar el session storage
 
-var salir = document.getElementById("salir")
-salir.addEventListener("click", () => {
-  sessionStorage.clear();
-  window.location.href="login.html";
-});
+ var salir = document.getElementById("salir")
+ salir.addEventListener("click", () => {
+   sessionStorage.clear();
+   localStorage.clear();
+   window.location.href="login.html";
+ });
+
+function limpiarStorage(){
+  localStorage.clear();
+  document.getElementById("namespan").innerHTML = "";
+  document.getElementById("agespan").innerHTML = "";
+  document.getElementById("emailspan").innerHTML = "";
+  document.getElementById("telspan").innerHTML = "";
+}
+
 

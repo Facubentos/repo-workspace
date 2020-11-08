@@ -27,6 +27,20 @@
         font-size: 3.5rem;
       }
     }
+
+    #tel::-webkit-inner-spin-button, 
+    #tel::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    }
+
+    .registro-error{
+      display: none;
+      color: red;
+      text-align: center;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -48,14 +62,82 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
+
+  <div class="text-center p-4">
+    <h2>Mi Perfil</h2>
+    <p class="lead">Verás aquí tu perfil.</p>
+</div>
+
+   <div class="container py-1">
+
+    <div class="row">
+    <div class="col-4" >
+     <div>
+        <img class="img-thumbnail" src="img/predeterminada.png" alt="imgPredeterminada">
+      </div>
+
+      <div class="col">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+          <label class="custom-file-label mt-3" for="customFileLang">Seleccionar Archivo</label>
+        </div>
+      </div>
+    </div>
+
+  <form class="col">
+    <div class="form-group">
+      <label for="name">Nombre completo:</label>
+      <span class="h4"><strong id="namespan"></strong></span>
+      <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre completo">
+      <span id="validar-name" class="registro-error">*Debe ingresar su nombre completo*</span>
+    </div>
+    <div class="form-group">
+      <label for="edad">Edad:</label>
+      <span class="h4"><strong id="agespan"></strong></span>
+      <input type="number" step="1" minlength="1" class="form-control" id="edad" placeholder="Ingrese su edad">
+      <span id="validar-age" class="registro-error">*Debe ingresar su edad*</span>
+    </div>
+    <div class="form-group">
+      <label for="mail">Email:</label>
+      <span class="h4"><strong id="emailspan"></strong></span>
+      <input type="email" class="form-control" id="email" placeholder="Ingrese su e-mail">
+      <span id="validar-email" class="registro-error">*Debe ingresar su email*</span>
+    </div>
+    <div class="form-group">
+      <label for="">Teléfono:</label>
+      <span class="h4"><strong id="telspan"></strong></span>
+      <input type="number" class="form-control" id="tel" placeholder="Ingrese su teléfono">
+      <span id="validar-tel" class="registro-error">*Debe ingresar su teléfono*</span>
+    </div>
+    <button type="button" onclick="validarRegistro()" class="btn btn-primary">Guardar</button>
+    <button type="button" onclick="limpiarStorage()" class="btn btn-secondary">Eliminar datos</button>
+  </form>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
-  </div>
+  </div> -->
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>

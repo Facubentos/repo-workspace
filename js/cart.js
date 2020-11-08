@@ -76,7 +76,7 @@ function mostrarTotal(currency, costo, cantidad, i){
 var finalsub = document.getElementById('subtotalid');
 function premium(){
     envio = parseInt(finalsub.innerHTML);
-    finalenv = Math.round(envio / 0.15);
+    finalenv = Math.round(envio * 0.15);
    document.getElementById('envioid').innerHTML =finalenv+ " UYU";
 }
 
@@ -84,14 +84,14 @@ function premium(){
 
 function express(){
     envio = parseInt(finalsub.innerHTML);
-    finalenv = Math.round(envio / 0.7);
+    finalenv = Math.round(envio * 0.7);
    document.getElementById('envioid').innerHTML =finalenv+ " UYU";
 }
 
 
 function standard(){
     envio = parseInt(finalsub.innerHTML);
-    finalenv = Math.round(envio / 0.5);
+    finalenv = Math.round(envio * 0.5);
    document.getElementById('envioid').innerHTML =finalenv+ " UYU";
 }
 
@@ -142,9 +142,6 @@ document.addEventListener("DOMContentLoaded", function(e){
  function abrirModal(){
        $('#myModal').modal('show');
    }
-
- 
-   document.getElementById('totalid').value = document.getElementById('totalModal').innerHTML;
 
 // SECCION 1 DEL MODAL:
 
